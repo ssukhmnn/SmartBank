@@ -15,6 +15,8 @@ protected:
     double balance;
     Transaction history[100];
     int txnCount;
+    int pin;
+    int failedAttempts;
 
     void record(string type, double amount);
 
@@ -31,6 +33,12 @@ public:
     double getBalance() { return balance; }
     string getName() { return holderName; }
     void printStatement();
+    void setPin(int p);
+    void checkPin(int p); // throws if wrong or locked
+    int getPin() { return pin; }
+    int getFailedAttempts() { return failedAttempts; }
+    void setFailedAttempts(int n) { failedAttempts = n; }
+    void unlock() { failedAttempts = 0; }
     void setName(string newName) { holderName = newName; }
     void restore(int no, double bal)
     {

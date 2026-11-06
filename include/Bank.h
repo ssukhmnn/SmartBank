@@ -14,7 +14,7 @@ public:
     Bank();
     ~Bank();
 
-    int createAccount(int type, string name, double openingBalance); // 1 = Savings, 2 = Current
+    int createAccount(int type, string name, double openingBalance, int pin);
     Account *findAccount(int accNo);
     void deleteAccount(int accNo);
     void modifyName(int accNo, string newName);

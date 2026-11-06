@@ -15,6 +15,8 @@ Account::Account(string name, double openingBalance)
     holderName = name;
     balance = openingBalance;
     txnCount = 0;
+    pin = 0;
+    failedAttempts = 0;
 }
 
 void Account::record(string type, double amount)
@@ -60,4 +62,26 @@ ostream &operator<<(ostream &os, Account &acc)
     os << "[" << acc.accNo << "] " << acc.holderName
        << " (" << acc.getType() << ") Balance: " << acc.balance;
     return os;
+}
+void Account::setPin(int p)
+{
+    if (p < 1000 || p > 9999)
+    {
+        throw BankException("PIN must be exactly 4 digits.");
+    }
+    pin = p;
+}
+
+void Account::checkPin(int p)
+{
+    if (failedAttempts >= 3)
+    {
+        throw BankException("Account is locked. Contact the admin.");
+    }
+    if (p != pin)
+    {
+        failedAttempts++;
+        throw InvalidPINException();
+    }
+    failedAttempts = 0; // correct PIN resets the counter
 }
