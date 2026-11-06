@@ -20,11 +20,15 @@ Bank::~Bank()
     }
 }
 
-int Bank::createAccount(int type, string name, double openingBalance)
+int Bank::createAccount(int type, string name, double openingBalance, int pin)
 {
     if (count == 100)
     {
         throw BankException("Bank is full.");
+    }
+    if (pin < 1000 || pin > 9999)
+    {
+        throw BankException("PIN must be exactly 4 digits.");
     }
     Account *acc;
     if (type == 1)
@@ -39,6 +43,7 @@ int Bank::createAccount(int type, string name, double openingBalance)
     {
         throw BankException("Invalid account type.");
     }
+    acc->setPin(pin);
     accounts[count] = acc;
     count++;
     return acc->getAccNo();
@@ -118,6 +123,8 @@ void Bank::saveToFile()
         out << accounts[i]->getType() << " "
             << accounts[i]->getAccNo() << " "
             << accounts[i]->getBalance() << " "
+            << accounts[i]->getPin() << " "
+            << accounts[i]->getFailedAttempts() << " "
             << accounts[i]->getName() << endl;
     }
     out.close();
@@ -128,28 +135,30 @@ void Bank::loadFromFile()
     ifstream in("data/accounts.txt");
     if (!in)
     {
-        return; // no file yet: first run
+        return;
     }
     string type, name;
-    int no;
+    int no, pin, failed;
     double bal;
     int maxNo = 1000;
 
-    while (count < 100 && in >> type >> no >> bal)
+    while (count < 100 && in >> type >> no >> bal >> pin >> failed)
     {
         getline(in, name);
-        name.erase(0, 1); // remove the space before the name
+        name.erase(0, 1);
 
         Account *acc;
         if (type == "Savings")
         {
-            acc = new SavingsAccount(name, 500); // 500 is just a placeholder
+            acc = new SavingsAccount(name, 500);
         }
         else
         {
             acc = new CurrentAccount(name, 0);
         }
-        acc->restore(no, bal); // put back the real number and balance
+        acc->restore(no, bal);
+        acc->setPin(pin);
+        acc->setFailedAttempts(failed);
 
         accounts[count] = acc;
         count++;
@@ -158,6 +167,6 @@ void Bank::loadFromFile()
             maxNo = no;
         }
     }
-    Account::setNextAccNo(maxNo + 1); // so new accounts continue the numbering
+    Account::setNextAccNo(maxNo + 1);
     in.close();
 }

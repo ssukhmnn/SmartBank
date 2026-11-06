@@ -1,0 +1,1 @@
+g++ -Wall -Iinclude main.cpp src/Transaction.cpp src/Account.cpp src/SavingsAccount.cpp src/CurrentAccount.cpp src/Bank.cpp src/Input.cpp src/ATM.cpp src/AdminPanel.cpp -o bank
