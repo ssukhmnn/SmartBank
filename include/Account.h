@@ -31,6 +31,13 @@ public:
     double getBalance() { return balance; }
     string getName() { return holderName; }
     void printStatement();
+    void setName(string newName) { holderName = newName; }
+    void restore(int no, double bal)
+    {
+        accNo = no;
+        balance = bal;
+    }
+    static void setNextAccNo(int n) { nextAccNo = n; }
 
     void operator+=(double amount); // operator overloading
     friend ostream &operator<<(ostream &os, Account &acc);

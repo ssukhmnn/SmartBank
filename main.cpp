@@ -1,35 +1,26 @@
 #include <iostream>
-#include "SavingsAccount.h"
-#include "CurrentAccount.h"
+#include "Bank.h"
 #include "Exceptions.h"
 using namespace std;
 
 int main()
 {
-    Account *accounts[2];
-    accounts[0] = new SavingsAccount("Amit", 2000);
-    accounts[1] = new CurrentAccount("Neha", 1000);
+    Bank bank;
+    bank.loadFromFile();
 
-    for (int i = 0; i < 2; i++)
+    try
     {
-        try
-        {
-            *accounts[i] += 500;         // operator overloading
-            accounts[i]->withdraw(2500); // polymorphism: each type has its own rule
-        }
-        catch (BankException e)
-        {
-            cout << "Error for " << accounts[i]->getName()
-                 << ": " << e.getMessage() << endl;
-        }
-        cout << *accounts[i] << endl; // operator overloading
-        accounts[i]->printStatement();
-        cout << endl;
+        int a = bank.createAccount(1, "Amit Kumar", 2000);
+        int b = bank.createAccount(2, "Neha Singh", 1000);
+        bank.transfer(a, b, 700);  // works
+        bank.transfer(a, b, 5000); // fails: would go below the minimum
+    }
+    catch (BankException e)
+    {
+        cout << "Error: " << e.getMessage() << endl;
     }
 
-    for (int i = 0; i < 2; i++)
-    {
-        delete accounts[i];
-    }
+    bank.displayAll();
+    bank.saveToFile();
     return 0;
 }

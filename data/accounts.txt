@@ -1,0 +1,4 @@
+Savings 1001 1300.00 Amit Kumar
+Current 1002 1700.00 Neha Singh
+Savings 1003 1300.00 Amit Kumar
+Current 1004 1700.00 Neha Singh
