@@ -1,26 +1,40 @@
 #include <iostream>
 #include "Bank.h"
-#include "Exceptions.h"
+#include "ATM.h"
+#include "AdminPanel.h"
+#include "Input.h"
 using namespace std;
 
 int main()
 {
     Bank bank;
     bank.loadFromFile();
+    ATM atm(&bank);
+    AdminPanel admin(&bank);
 
-    try
+    int choice = 0;
+    while (choice != 3)
     {
-        int a = bank.createAccount(1, "Amit Kumar", 2000);
-        int b = bank.createAccount(2, "Neha Singh", 1000);
-        bank.transfer(a, b, 700);  // works
-        bank.transfer(a, b, 5000); // fails: would go below the minimum
-    }
-    catch (BankException e)
-    {
-        cout << "Error: " << e.getMessage() << endl;
-    }
+        cout << "\n===== SMART BANK =====" << endl;
+        cout << "1. Customer (ATM)" << endl;
+        cout << "2. Admin" << endl;
+        cout << "3. Exit" << endl;
+        choice = readInt("Choose: ");
 
-    bank.displayAll();
+        if (choice == 1)
+        {
+            atm.start();
+        }
+        else if (choice == 2)
+        {
+            admin.start();
+        }
+        else if (choice != 3)
+        {
+            cout << "Invalid choice." << endl;
+        }
+    }
     bank.saveToFile();
+    cout << "Goodbye!" << endl;
     return 0;
 }
