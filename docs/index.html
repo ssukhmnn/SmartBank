@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Bank System</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 15px; line-height: 1.6; }
+        h1 { color: #1a4d8f; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+        th { background-color: #e6eef8; }
+        code { background-color: #f0f0f0; padding: 2px 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Bank System</h1>
+    <p>A console-based banking and ATM application written in C++ using Object-Oriented Programming.</p>
+
+    <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#oop">OOP concepts</a></li>
+        <li><a href="#run">How to run</a></li>
+        <li><a href="#team">Team</a></li>
+    </ul>
+
+    <h2 id="features">Features</h2>
+    <ul>
+        <li>Admin panel: create, modify, delete and view accounts, unlock accounts</li>
+        <li>ATM: PIN login, balance, deposit, withdraw, mini statement</li>
+        <li>Savings and Current account types</li>
+        <li>Account locks after 3 wrong PIN attempts</li>
+        <li>Data saved in a file between sessions</li>
+    </ul>
+
+    <h2 id="oop">OOP concepts used</h2>
+    <table>
+        <tr>
+            <th>Concept</th>
+            <th>Where it is used</th>
+        </tr>
+        <tr>
+            <td>Inheritance</td>
+            <td>SavingsAccount and CurrentAccount inherit from Account</td>
+        </tr>
+        <tr>
+            <td>Abstract class and polymorphism</td>
+            <td>Account has pure virtual functions; withdraw() behaves differently per type</td>
+        </tr>
+        <tr>
+            <td>Operator overloading</td>
+            <td>+= for deposits, &lt;&lt; for printing an account</td>
+        </tr>
+        <tr>
+            <td>Exception handling</td>
+            <td>Custom exceptions for low balance, wrong PIN, missing account</td>
+        </tr>
+        <tr>
+            <td>File handling</td>
+            <td>Accounts saved and loaded using ofstream and ifstream</td>
+        </tr>
+    </table>
+
+    <h2 id="run">How to run</h2>
+    <ol>
+        <li>Clone the repository from GitHub.</li>
+        <li>Open a terminal in the project folder.</li>
+        <li>Run <code>.\build.bat</code> to compile.</li>
+        <li>Run <code>.\bank.exe</code> to start the program.</li>
+        <li>Admin password: <code>admin123</code></li>
+    </ol>
+    <p><a href="https://github.com/ssukhmnn/SmartBank">View the source code on GitHub</a></p>
+
+    <h2 id="team">Team</h2>
+    <ul>
+        <li>[Name 1]</li>
+        <li>[Name 2]</li>
+    </ul>
+
+</body>
+</html>
