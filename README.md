@@ -67,4 +67,4 @@ g++ -Wall -Iinclude main.cpp src/Transaction.cpp src/Account.cpp src/SavingsAcco
 ## Known limitations
 
 - The PIN and admin password are stored as plain text (fine for a college project; a real bank would store hashes).
-- The mini statement only shows transactions from the current run, because transaction history is not saved in the file .
+- The mini statement only shows transactions from the current run, because transaction history is not saved in the file.
