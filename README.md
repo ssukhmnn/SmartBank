@@ -2,7 +2,7 @@
 
 A console-based banking and ATM application in C++, built as an Object-Oriented Programming project.
 
-**Team:** [Name 1], [Name 2]
+**Team:** [Sukhman Singh 2514208], [Sukhveer Singh 2514213] ,[Sukhamrit Singh 2514206]
 **Course:** OOPs in C++ | **College:** [College name] | **Year:** 2026
 
 ## Features
